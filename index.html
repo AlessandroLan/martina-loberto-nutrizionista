@@ -248,48 +248,6 @@
   .field textarea{resize:vertical;min-height:100px;}
   .contact-form .btn-solid{align-self:flex-start;border:none;cursor:pointer;}
 
-  /* ---------- INSTAGRAM MOCKUP ---------- */
-  .instafeed{background:var(--paper-dark);}
-  .insta-head{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:1.4rem;}
-  .insta-head p{color:rgba(38,49,31,0.78);margin-top:0.6rem;max-width:48ch;}
-  .insta-follow{
-    font-family:'IBM Plex Mono',monospace;font-size:0.78rem;letter-spacing:0.05em;
-    display:inline-flex;align-items:center;gap:0.5rem;
-    padding:0.85rem 1.4rem;border:1px solid var(--ink);border-radius:2px;
-    transition:background .25s ease, color .25s ease;
-  }
-  .insta-follow:hover{background:var(--ink);color:var(--paper);}
-  .insta-follow svg{width:15px;height:15px;}
-  .insta-grid{
-    margin-top:2.6rem;display:grid;
-    grid-template-columns:repeat(6,1fr);gap:0.9rem;
-  }
-  .insta-embed{margin-top:2.6rem;}
-  .insta-tile{
-    aspect-ratio:1/1;border-radius:4px;position:relative;overflow:hidden;
-    display:flex;align-items:center;justify-content:center;
-    cursor:pointer;
-  }
-  .insta-tile svg{width:34%;opacity:0.55;position:relative;z-index:1;}
-  .insta-tile::after{
-    content:'';position:absolute;inset:0;background:rgba(38,49,31,0);
-    transition:background .25s ease;
-  }
-  .insta-tile:hover::after{background:rgba(38,49,31,0.18);}
-  .insta-tile:nth-child(1){background:linear-gradient(150deg,#c99a3b,#e7c581);}
-  .insta-tile:nth-child(2){background:linear-gradient(150deg,#5b6b3f,#8ba066);}
-  .insta-tile:nth-child(3){background:linear-gradient(150deg,#b2612e,#d68f5e);}
-  .insta-tile:nth-child(4){background:linear-gradient(150deg,#8ba066,#c9a15c);}
-  .insta-tile:nth-child(5){background:linear-gradient(150deg,#d68f5e,#e7c581);}
-  .insta-tile:nth-child(6){background:linear-gradient(150deg,#26311f,#5b6b3f);}
-  .insta-note{
-    margin-top:1.2rem;font-family:'IBM Plex Mono',monospace;font-size:0.7rem;
-    color:rgba(38,49,31,0.5);letter-spacing:0.03em;
-  }
-  @media (max-width:860px){
-    .insta-grid{grid-template-columns:repeat(3,1fr);}
-  }
-
   /* ---------- FOOTER ---------- */
   footer{
     background:var(--ink);color:rgba(242,236,218,0.55);
@@ -535,31 +493,6 @@
         <blockquote>"Consigliatissima. Le ricette proposte sono facili da preparare e sorprendentemente gustose."</blockquote>
         <cite>Davide P.</cite>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- INSTAGRAM FEED (MOCKUP) -->
-<section class="instafeed">
-  <div class="wrap">
-    <div class="insta-head reveal">
-      <div>
-        <span class="eyebrow">Dal profilo</span>
-        <h2 class="section-title">Ultimi post su Instagram</h2>
-        <p>Gli ultimi post pubblicati sul profilo, aggiornati automaticamente.</p>
-      </div>
-      <a href="https://www.instagram.com/dott.ssa_martina_loberto/" target="_blank" rel="noopener noreferrer" class="insta-follow">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-          <rect x="3" y="3" width="18" height="18" rx="5"/>
-          <circle cx="12" cy="12" r="4"/>
-          <circle cx="17.2" cy="6.8" r="1"/>
-        </svg>
-        Segui su Instagram
-      </a>
-    </div>
-    <div class="insta-embed reveal">
-      <script src="https://elfsightcdn.com/platform.js" async></script>
-      <div class="elfsight-app-6b134853-f931-44bc-9590-190ee5868d3d" data-elfsight-app-lazy></div>
     </div>
   </div>
 </section>
