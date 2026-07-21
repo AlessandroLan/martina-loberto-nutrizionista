@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Martina Loberto — Nutrizionista</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500;1,9..144,600&family=Work+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#26311f;
+    --paper:#f2ecda;
+    --paper-dark:#e7dcc0;
+    --clay:#b2612e;
+    --olive:#5b6b3f;
+    --gold:#c99a3b;
+    --line: rgba(38,49,31,0.14);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Work Sans', sans-serif;
+    font-weight:400;
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  img,svg{display:block;max-width:100%;}
+  a{color:inherit;text-decoration:none;}
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.72rem;
+    letter-spacing:0.16em;
+    text-transform:uppercase;
+    color:var(--clay);
+  }
+  h1,h2,h3{font-family:'Fraunces', serif;font-weight:600;line-height:1.08;}
+  .section-title{font-size:clamp(2rem,4vw,2.9rem);margin:0.4rem 0 1rem;}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 6vw;}
+  section{padding:6.5rem 0;}
+
+  /* ---------- NAV ---------- */
+  header.nav{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    padding:1.3rem 6vw;
+    display:flex;align-items:center;justify-content:space-between;
+    transition:background .4s ease, padding .4s ease, box-shadow .4s ease;
+  }
+  header.nav.scrolled{
+    background:rgba(242,236,218,0.92);
+    backdrop-filter:blur(8px);
+    padding:0.85rem 6vw;
+    box-shadow:0 1px 0 var(--line);
+  }
+  .logo{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.85rem;
+    letter-spacing:0.06em;
+    color:var(--ink);
+  }
+  header.nav.scrolled .logo, header.nav.scrolled .navlinks a{color:var(--ink);}
+  .navlinks{display:flex;gap:2.1rem;}
+  .navlinks a{
+    font-size:0.85rem;color:var(--paper);
+    position:relative;padding-bottom:3px;
+  }
+  header.nav.scrolled .navlinks a{color:var(--ink);}
+  .navlinks a::after{
+    content:'';position:absolute;left:0;bottom:0;width:0;height:1px;
+    background:currentColor;transition:width .3s ease;
+  }
+  .navlinks a:hover::after{width:100%;}
+  .navtoggle{display:none;}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    min-height:100vh;
+    background:var(--ink);
+    color:var(--paper);
+    display:flex;align-items:center;
+    position:relative;
+    overflow:hidden;
+  }
+  .hero .wrap{
+    display:grid;grid-template-columns:1.15fr 0.85fr;gap:3rem;align-items:center;
+    position:relative;z-index:2;
+    padding-top:5rem;
+  }
+  .hero-eyebrow{
+    font-family:'IBM Plex Mono', monospace;font-size:0.78rem;
+    letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);
+    margin-bottom:1.1rem;display:block;
+  }
+  .hero h1{
+    font-size:clamp(3rem,7vw,5.6rem);
+    color:var(--paper);
+    font-style:italic;
+    font-weight:500;
+  }
+  .hero p.tagline{
+    margin-top:1.4rem;font-size:1.18rem;max-width:34ch;
+    color:rgba(242,236,218,0.82);font-weight:300;
+  }
+  .hero-cta{display:flex;gap:1rem;margin-top:2.6rem;flex-wrap:wrap;}
+  .btn{
+    font-family:'IBM Plex Mono', monospace;font-size:0.78rem;letter-spacing:0.06em;
+    text-transform:uppercase;padding:0.95rem 1.7rem;border-radius:2px;
+    display:inline-block;transition:transform .25s ease, background .25s ease, color .25s ease;
+    border:1px solid var(--gold);
+  }
+  .btn-solid{background:var(--gold);color:var(--ink);}
+  .btn-solid:hover{transform:translateY(-2px);background:#dcb257;}
+  .btn-ghost{color:var(--paper);border-color:rgba(242,236,218,0.4);}
+  .btn-ghost:hover{transform:translateY(-2px);border-color:var(--paper);}
+  .hero-art{justify-self:center;}
+  .hero-art svg{width:min(100%,340px);}
+
+  .hero::after{
+    content:'';position:absolute;inset:0;
+    background:
+      radial-gradient(ellipse at 85% 20%, rgba(201,154,59,0.13), transparent 55%),
+      radial-gradient(ellipse at 10% 90%, rgba(91,107,63,0.22), transparent 55%);
+    pointer-events:none;
+  }
+
+  /* ---------- ABOUT ---------- */
+  .about .wrap{display:grid;grid-template-columns:0.85fr 1.15fr;gap:4rem;align-items:start;}
+  .portrait{
+    aspect-ratio:4/5;border-radius:6px;
+    background:linear-gradient(160deg, var(--paper-dark), #d8c9a0);
+    display:flex;align-items:center;justify-content:center;
+    position:relative;overflow:hidden;
+  }
+  .portrait svg{width:58%;opacity:0.85;}
+  .portrait::before{
+    content:'';position:absolute;inset:0;
+    border:1px solid rgba(38,49,31,0.18);border-radius:6px;
+  }
+  .about-body p{max-width:60ch;color:rgba(38,49,31,0.86);margin-bottom:1.1rem;}
+  .credentials{list-style:none;margin-top:1.8rem;display:flex;flex-direction:column;gap:0.7rem;}
+  .credentials li{
+    display:flex;gap:0.8rem;align-items:baseline;
+    font-size:0.95rem;padding-bottom:0.7rem;border-bottom:1px solid var(--line);
+  }
+  .credentials li span.mark{color:var(--clay);font-family:'IBM Plex Mono',monospace;font-size:0.78rem;}
+
+  /* ---------- RECIPES ---------- */
+  .recipes{background:var(--paper-dark);}
+  .recipe-head{max-width:56ch;}
+  .recipe-head p{color:rgba(38,49,31,0.82);margin-top:0.6rem;}
+  .recipe-grid{
+    margin-top:3.5rem;
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:2.6rem 2rem;
+  }
+  .card{
+    background:var(--paper);
+    padding:2rem 1.7rem 1.6rem;
+    position:relative;
+    box-shadow:0 10px 24px -14px rgba(38,49,31,0.35);
+    clip-path: polygon(0% 1.5%, 3% 0%, 97% 0%, 100% 1.5%, 100% 98.5%, 97% 100%, 3% 100%, 0% 98.5%);
+  }
+  .card:nth-child(1){transform:rotate(-1.4deg);}
+  .card:nth-child(2){transform:rotate(1deg);}
+  .card:nth-child(3){transform:rotate(-0.7deg);}
+  .card:nth-child(4){transform:rotate(1.6deg);}
+  .card:hover{transform:rotate(0deg) translateY(-4px);transition:transform .3s ease;}
+  .pin{
+    position:absolute;top:-7px;left:50%;transform:translateX(-50%);
+    width:11px;height:11px;border-radius:50%;
+    background:var(--clay);
+    box-shadow:0 2px 4px rgba(0,0,0,0.25);
+  }
+  .card h3{font-size:1.35rem;margin-bottom:0.5rem;}
+  .card .desc{font-size:0.92rem;color:rgba(38,49,31,0.78);margin-bottom:1rem;}
+  .meta-row{
+    display:flex;gap:1rem;flex-wrap:wrap;
+    font-family:'IBM Plex Mono',monospace;font-size:0.72rem;
+    color:var(--olive);margin-bottom:1.1rem;letter-spacing:0.02em;
+  }
+  .tag{
+    display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:0.68rem;
+    letter-spacing:0.05em;text-transform:uppercase;color:var(--ink);
+    background:rgba(201,154,59,0.28);padding:0.2rem 0.55rem;border-radius:20px;
+    margin:0 0.3rem 0.3rem 0;
+  }
+  details{margin-top:0.6rem;border-top:1px dashed var(--line);padding-top:0.7rem;}
+  summary{cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:0.72rem;letter-spacing:0.05em;text-transform:uppercase;color:var(--clay);}
+  details ul{margin:0.7rem 0 0 1.1rem;font-size:0.88rem;color:rgba(38,49,31,0.85);}
+  details ul li{margin-bottom:0.3rem;}
+
+  /* ---------- REVIEWS ---------- */
+  .reviews-head{max-width:56ch;}
+  .review-grid{
+    margin-top:3.2rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:2.4rem;
+  }
+  .review{
+    border-left:2px solid var(--olive);padding-left:1.3rem;
+  }
+  .stars{color:var(--gold);font-size:0.9rem;letter-spacing:0.15em;margin-bottom:0.7rem;}
+  .review blockquote{
+    font-family:'Fraunces', serif;font-style:italic;font-weight:500;
+    font-size:1.12rem;color:var(--ink);margin-bottom:1rem;
+  }
+  .review cite{font-family:'IBM Plex Mono',monospace;font-size:0.75rem;font-style:normal;color:var(--olive);text-transform:uppercase;letter-spacing:0.04em;}
+
+  /* ---------- CONTACT ---------- */
+  .contact{background:var(--ink);color:var(--paper);}
+  .contact .wrap{display:grid;grid-template-columns:1fr 1fr;gap:4rem;}
+  .contact .section-title{color:var(--paper);}
+  .contact-info dl{margin-top:1.6rem;display:flex;flex-direction:column;gap:1.2rem;}
+  .contact-info dt{
+    font-family:'IBM Plex Mono',monospace;font-size:0.7rem;text-transform:uppercase;
+    letter-spacing:0.1em;color:var(--gold);margin-bottom:0.3rem;
+  }
+  .contact-info dd{font-size:1rem;color:rgba(242,236,218,0.9);}
+  .hours{margin-top:2.2rem;border-top:1px solid rgba(242,236,218,0.18);padding-top:1.2rem;}
+  .hours-row{display:flex;justify-content:space-between;font-size:0.9rem;padding:0.4rem 0;color:rgba(242,236,218,0.82);border-bottom:1px solid rgba(242,236,218,0.1);}
+  .hours-row span:first-child{font-family:'IBM Plex Mono',monospace;font-size:0.75rem;color:rgba(242,236,218,0.6);}
+
+  .contact-form{display:flex;flex-direction:column;gap:1rem;}
+  .field label{
+    font-family:'IBM Plex Mono',monospace;font-size:0.7rem;text-transform:uppercase;
+    letter-spacing:0.08em;color:var(--gold);display:block;margin-bottom:0.4rem;
+  }
+  .field input, .field textarea{
+    width:100%;background:transparent;border:1px solid rgba(242,236,218,0.3);
+    color:var(--paper);padding:0.75rem 0.9rem;font-family:'Work Sans',sans-serif;
+    font-size:0.95rem;border-radius:2px;
+  }
+  .field input:focus, .field textarea:focus{outline:2px solid var(--gold);outline-offset:2px;}
+  .field textarea{resize:vertical;min-height:100px;}
+  .contact-form .btn-solid{align-self:flex-start;border:none;cursor:pointer;}
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    background:var(--ink);color:rgba(242,236,218,0.55);
+    padding:2rem 6vw;display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;
+    font-size:0.8rem;border-top:1px solid rgba(242,236,218,0.12);
+  }
+  footer .social{display:flex;gap:1rem;}
+  footer .social a{color:rgba(242,236,218,0.6);}
+  footer .social a:hover{color:var(--gold);}
+
+  /* ---------- REVEAL ---------- */
+  .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease, transform .7s ease;}
+  .reveal.in{opacity:1;transform:translateY(0);}
+
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    .reveal{opacity:1;transform:none;transition:none;}
+    .card:hover{transform:none;}
+  }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width:860px){
+    .hero .wrap{grid-template-columns:1fr;padding-top:6.5rem;}
+    .hero-art{justify-self:start;margin-top:2rem;order:2;}
+    .about .wrap{grid-template-columns:1fr;}
+    .portrait{max-width:280px;}
+    .contact .wrap{grid-template-columns:1fr;}
+    .navlinks{
+      position:fixed;inset:0 0 0 30%;background:var(--ink);
+      flex-direction:column;justify-content:center;align-items:flex-start;
+      padding:2rem 2.2rem;gap:1.6rem;transform:translateX(100%);
+      transition:transform .35s ease;z-index:99;
+    }
+    .navlinks.open{transform:translateX(0);}
+    .navlinks a{color:var(--paper) !important;font-size:1.1rem;}
+    .navtoggle{
+      display:block;background:none;border:none;color:var(--paper);
+      font-family:'IBM Plex Mono',monospace;font-size:1.3rem;cursor:pointer;z-index:101;
+    }
+    header.nav.scrolled .navtoggle{color:var(--ink);}
+    section{padding:4.5rem 0;}
+  }
+</style>
+</head>
+<body>
+
+<header class="nav" id="nav">
+  <div class="logo">MARTINA&nbsp;LOBERTO</div>
+  <nav class="navlinks" id="navlinks">
+    <a href="#chi-sono">Chi sono</a>
+    <a href="#ricette">Ricette</a>
+    <a href="#recensioni">Recensioni</a>
+    <a href="#contatti">Contatti</a>
+  </nav>
+  <button class="navtoggle" id="navtoggle" aria-label="Apri il menu">☰</button>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <span class="hero-eyebrow">Studio di nutrizione — Taranto</span>
+      <h1>Martina<br>Loberto</h1>
+      <p class="tagline">Un percorso nutrizionale su misura, costruito insieme, per ritrovare equilibrio con il cibo e con te stesso.</p>
+      <div class="hero-cta">
+        <a href="#ricette" class="btn btn-solid">Scopri le ricette</a>
+        <a href="#contatti" class="btn btn-ghost">Prenota una visita</a>
+      </div>
+    </div>
+    <div class="hero-art">
+      <svg viewBox="0 0 200 260" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M100 250C100 250 40 200 40 130C40 70 70 30 100 10C130 30 160 70 160 130C160 200 100 250 100 250Z" stroke="#c99a3b" stroke-width="1.4" opacity="0.85"/>
+        <path d="M100 250V40" stroke="#c99a3b" stroke-width="1" opacity="0.6"/>
+        <path d="M100 90C100 90 75 78 68 55" stroke="#c99a3b" stroke-width="1" opacity="0.6"/>
+        <path d="M100 140C100 140 128 126 136 100" stroke="#c99a3b" stroke-width="1" opacity="0.6"/>
+        <path d="M100 190C100 190 74 178 65 155" stroke="#c99a3b" stroke-width="1" opacity="0.6"/>
+        <circle cx="100" cy="130" r="95" stroke="#f2ecda" stroke-opacity="0.15"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="chi-sono">
+  <div class="wrap">
+    <div class="portrait reveal">
+      <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="50" cy="38" r="18" stroke="#26311f" stroke-width="1.3"/>
+        <path d="M20 88C20 66 33 56 50 56C67 56 80 66 80 88" stroke="#26311f" stroke-width="1.3"/>
+      </svg>
+    </div>
+    <div class="about-body reveal">
+      <span class="eyebrow">Chi sono</span>
+      <h2 class="section-title">Una biologa nutrizionista al tuo fianco</h2>
+      <p>Testo di esempio: qui racconterai il tuo percorso di studi, il tuo approccio al lavoro con i pazienti e cosa rende unico il tuo metodo. Parla di come è nata la tua passione per la nutrizione e di cosa le persone possono aspettarsi dal primo incontro con te.</p>
+      <p>Aggiungi qui qualche riga più personale: filosofia del lavoro, specializzazioni, e perché credi che il cibo sia uno strumento di benessere quotidiano prima ancora che una regola da seguire.</p>
+      <ul class="credentials">
+        <li><span class="mark">01</span> Laurea in Scienze della Nutrizione Umana</li>
+        <li><span class="mark">02</span> Iscrizione all'Albo dei Biologi Nutrizionisti</li>
+        <li><span class="mark">03</span> Formazione in nutrizione clinica e sportiva</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- RECIPES -->
+<section class="recipes" id="ricette">
+  <div class="wrap">
+    <div class="recipe-head reveal">
+      <span class="eyebrow">In cucina</span>
+      <h2 class="section-title">Ricette dallo studio</h2>
+      <p>Una selezione di ricette semplici, equilibrate e pensate per la vita di tutti i giorni — di esempio, in attesa delle tue ricette originali.</p>
+    </div>
+    <div class="recipe-grid">
+      <article class="card reveal">
+        <div class="pin"></div>
+        <h3>Porridge con frutti di bosco e chia</h3>
+        <p class="desc">Una colazione calda e saziante, ricca di fibre e antiossidanti, pronta in dieci minuti.</p>
+        <div class="meta-row"><span>⏱ 10 min</span><span>≈ 320 kcal</span></div>
+        <div><span class="tag">Colazione</span><span class="tag">Vegetariano</span></div>
+        <details>
+          <summary>Ingredienti</summary>
+          <ul>
+            <li>50 g di fiocchi d'avena</li>
+            <li>200 ml di bevanda vegetale</li>
+            <li>1 cucchiaio di semi di chia</li>
+            <li>Un pugno di frutti di bosco misti</li>
+            <li>Un cucchiaino di miele</li>
+          </ul>
+        </details>
+      </article>
+
+      <article class="card reveal">
+        <div class="pin"></div>
+        <h3>Farro, ceci e verdure grigliate</h3>
+        <p class="desc">Un piatto unico completo, ideale da preparare in anticipo per il pranzo in ufficio.</p>
+        <div class="meta-row"><span>⏱ 25 min</span><span>≈ 410 kcal</span></div>
+        <div><span class="tag">Pranzo</span><span class="tag">Senza lattosio</span></div>
+        <details>
+          <summary>Ingredienti</summary>
+          <ul>
+            <li>80 g di farro perlato</li>
+            <li>100 g di ceci lessati</li>
+            <li>Zucchine e melanzane grigliate</li>
+            <li>Olio extravergine d'oliva</li>
+            <li>Succo di limone e menta fresca</li>
+          </ul>
+        </details>
+      </article>
+
+      <article class="card reveal">
+        <div class="pin"></div>
+        <h3>Salmone al forno, broccoli e patate dolci</h3>
+        <p class="desc">Una cena equilibrata tra proteine, omega-3 e carboidrati a basso indice glicemico.</p>
+        <div class="meta-row"><span>⏱ 30 min</span><span>≈ 470 kcal</span></div>
+        <div><span class="tag">Cena</span><span class="tag">Senza glutine</span></div>
+        <details>
+          <summary>Ingredienti</summary>
+          <ul>
+            <li>150 g di filetto di salmone</li>
+            <li>1 patata dolce media</li>
+            <li>200 g di broccoli</li>
+            <li>Olio extravergine d'oliva e spezie</li>
+          </ul>
+        </details>
+      </article>
+
+      <article class="card reveal">
+        <div class="pin"></div>
+        <h3>Hummus di ceci fatto in casa</h3>
+        <p class="desc">Uno spuntino cremoso e proteico, perfetto con bastoncini di verdure crude.</p>
+        <div class="meta-row"><span>⏱ 10 min</span><span>≈ 180 kcal</span></div>
+        <div><span class="tag">Spuntino</span><span class="tag">Vegano</span></div>
+        <details>
+          <summary>Ingredienti</summary>
+          <ul>
+            <li>200 g di ceci lessati</li>
+            <li>1 cucchiaio di tahina</li>
+            <li>Succo di mezzo limone</li>
+            <li>1 spicchio d'aglio, olio extravergine</li>
+          </ul>
+        </details>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section id="recensioni">
+  <div class="wrap">
+    <div class="reviews-head reveal">
+      <span class="eyebrow">Testimonianze</span>
+      <h2 class="section-title">Cosa dicono i pazienti</h2>
+    </div>
+    <div class="review-grid">
+      <div class="review reveal">
+        <div class="stars">★★★★★</div>
+        <blockquote>"Grazie a Martina ho finalmente capito come mangiare in modo equilibrato senza rinunciare al gusto. Un percorso mai stressante."</blockquote>
+        <cite>Chiara R.</cite>
+      </div>
+      <div class="review reveal">
+        <div class="stars">★★★★★</div>
+        <blockquote>"Un approccio professionale e umano allo stesso tempo. Mi sono sentito ascoltato fin dal primo incontro."</blockquote>
+        <cite>Federico M.</cite>
+      </div>
+      <div class="review reveal">
+        <div class="stars">★★★★★</div>
+        <blockquote>"Dopo mesi di diete fallimentari, ho trovato un metodo sostenibile che riesco a seguire davvero."</blockquote>
+        <cite>Elisa T.</cite>
+      </div>
+      <div class="review reveal">
+        <div class="stars">★★★★★</div>
+        <blockquote>"Consigliatissima. Le ricette proposte sono facili da preparare e sorprendentemente gustose."</blockquote>
+        <cite>Davide P.</cite>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contatti">
+  <div class="wrap">
+    <div class="contact-info reveal">
+      <span class="eyebrow" style="color:var(--gold)">Contatti</span>
+      <h2 class="section-title">Vieni a trovarmi in studio</h2>
+      <dl>
+        <div>
+          <dt>Indirizzo</dt>
+          <dd>Via Giovanni Bovio 14, 74123 Taranto (TA)</dd>
+        </div>
+        <div>
+          <dt>Telefono</dt>
+          <dd>+39 099 123 4567</dd>
+        </div>
+        <div>
+          <dt>Email</dt>
+          <dd>info@martinaloberto-nutrizionista.it</dd>
+        </div>
+      </dl>
+      <div class="hours">
+        <div class="hours-row"><span>LUN – VEN</span><span>9:00 – 13:00 / 15:00 – 19:00</span></div>
+        <div class="hours-row"><span>SABATO</span><span>9:00 – 13:00</span></div>
+        <div class="hours-row"><span>DOMENICA</span><span>Chiuso</span></div>
+      </div>
+    </div>
+    <form class="contact-form reveal" action="mailto:info@martinaloberto-nutrizionista.it" method="post" enctype="text/plain">
+      <div class="field">
+        <label for="nome">Nome</label>
+        <input id="nome" name="nome" type="text" placeholder="Il tuo nome" required>
+      </div>
+      <div class="field">
+        <label for="email">Email</label>
+        <input id="email" name="email" type="email" placeholder="La tua email" required>
+      </div>
+      <div class="field">
+        <label for="messaggio">Messaggio</label>
+        <textarea id="messaggio" name="messaggio" placeholder="Raccontami come posso aiutarti"></textarea>
+      </div>
+      <button type="submit" class="btn btn-solid">Invia messaggio</button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <span>© <span id="year"></span> Martina Loberto Nutrizionista — P.IVA 00000000000</span>
+  <div class="social">
+    <a href="#" aria-label="Instagram">Instagram</a>
+    <a href="#" aria-label="Facebook">Facebook</a>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  const toggle = document.getElementById('navtoggle');
+  const links = document.getElementById('navlinks');
+  toggle.addEventListener('click', () => links.classList.toggle('open'));
+  links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => links.classList.remove('open')));
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
